@@ -1,6 +1,18 @@
+aula 1
+
 npx create-next-app fiap-app-next-js
 cd .\fiap-app-next-js\
 npm run dev
 code .
+
+========================== 
+
+aula 2
+
+npm install sass
+
+========================== 
+
+========================== 
 
 ========================== 
