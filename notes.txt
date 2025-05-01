@@ -1,0 +1,6 @@
+npx create-next-app fiap-app-next-js
+cd .\fiap-app-next-js\
+npm run dev
+code .
+
+========================== 
