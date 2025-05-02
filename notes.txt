@@ -13,6 +13,10 @@ npm install sass
 
 ========================== 
 
+aula 3
+
+npx create-next-app --example api-routes-rest api-routes-rest-app
+
 ========================== 
 
 ========================== 

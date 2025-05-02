@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../components/button/button";
-import "../styles/global.css";
+import "../styles/globals.css";
 
 const HomePage = () => {
   return (
