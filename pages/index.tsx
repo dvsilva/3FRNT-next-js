@@ -1,25 +1,45 @@
-import type { User } from "../interfaces";
-import useSwr from "swr";
-import Link from "next/link";
+import React from "react";
+import PersonComponent from "../components/PersonComponent";
+import type { Person } from "../interfaces/Person";
+// import { GetServerSideProps } from "next"; // SSR
+import { GetStaticProps } from "next"; // SSG
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
-export default function Index() {
-  const { data, error, isLoading } = useSwr<User[]>("/api/users", fetcher);
-
-  if (error) return <div>Failed to load users</div>;
-  if (isLoading) return <div>Loading...</div>;
-  if (!data) return null;
-
-  return (
-    <ul>
-      {data.map((user) => (
-        <li key={user.id}>
-          <Link href="/user/[id]" as={`/user/${user.id}`}>
-            {user.name ?? `User ${user.id}`}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
+interface Props {
+  data: Person[];
 }
+
+const Index: React.FC<Props> = ({ data }) => {
+  return (
+    <div>
+      <h1>Person List</h1>
+      <ul>
+        {data.map((p) => (
+          <PersonComponent key={p.id} person={p} />
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/people");
+    const data: Person[] = await response.json();
+
+    return {
+      props: {
+        data,
+      },
+      revalidate: 60, // Revalidate every 60 seconds
+    };
+  } catch (error) {
+    console.error("Erro ao buscar dados:", error);
+    return {
+      props: {
+        data: [],
+      },
+    };
+  }
+};
+
+export default Index;

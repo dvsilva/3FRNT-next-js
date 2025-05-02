@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { User } from "../../interfaces";
+import type { User } from "../../interfaces/User";
 
 // Fake users data
 const users: User[] = [{ id: 1 }, { id: 2 }, { id: 3 }];

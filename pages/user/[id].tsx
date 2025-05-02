@@ -1,4 +1,4 @@
-import type { User } from "../../interfaces";
+import type { User } from "../../interfaces/User";
 import { useRouter } from "next/router";
 import useSwr from "swr";
 
@@ -8,7 +8,7 @@ export default function UserPage() {
   const { query } = useRouter();
   const { data, error, isLoading } = useSwr<User>(
     query.id ? `/api/user/${query.id}` : null,
-    fetcher,
+    fetcher
   );
 
   if (error) return <div>Failed to load user</div>;
